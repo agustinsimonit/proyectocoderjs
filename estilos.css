@@ -1,0 +1,27 @@
+.menuPrincipal{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+    background-color: #214710;    
+    height: 4em;
+}
+.menuPrincipal li{
+    padding-top: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 2em;
+}
+.menuPrincipal a{
+    text-decoration: none;
+    color: white;
+}
+.contenedorServicios{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 1em;
+}
+
