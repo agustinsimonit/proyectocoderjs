@@ -89,7 +89,6 @@ inventario.push(new Producto (052, "MP", "Cataratas", 650, "regimen", 30));
 inventario.push(new Producto (053, "PC", "Cataratas", 1100, "regimen", 30));
 inventario.push(new Producto (054, "con Exc", "Cataratas", 1500, "actividades", 30));
 inventario.push(new Producto (055, "sin Exc", "Cataratas", 0, "actividades", 30));
-console.log(inventario);
 
 
 // Botones de cada destino, para agregar al carrito luego los productos necesarios.
@@ -106,8 +105,6 @@ contenedorBotonesServicios.innerHTML += `
 `
 botonesDestinos.appendChild(contenedorBotonesServicios);
 
-// Le tengo que decir a JS que me muestre Todos los objetos "Productos" cuyo elemento.destino sea igual a "bariloche"
-
 let botonBariloche = document.getElementById("btnBariloche").value;
 let botonMendoza = document.getElementById("btnMendoza").value;
 let botonSurArgentino = document.getElementById("btnSurArgentino").value;
@@ -115,7 +112,7 @@ let botonNorteArgentino = document.getElementById("btnNorteArgentino").value;
 let botonCataratas = document.getElementById("btnCataratas").value;
 
 $("#btnBariloche").click(() => {
-    for (elemento of inventario){
+    inventario.forEach((elemento) =>{
         if (botonBariloche == elemento.destino){
             console.log(Producto, "Bariloche")
             let filtrado = inventario.filter(elemento => elemento.destino == botonBariloche)
@@ -124,12 +121,10 @@ $("#btnBariloche").click(() => {
             console.log(inventarioFiltrado)
             let article = document.createElement("article")
             article.innerHTML = ""
-            // servicioInventario(filtrado)
-            inventarioFiltrado.forEach((elemento) => {
-                    let section = document.getElementById("paquetesPrincipales")
-                    article.classList.add("tipoDestino", elemento.tipo)
-                    article.setAttribute("destino", elemento.destino)
-                    article.innerHTML = `
+                let section = document.getElementById("paquetesPrincipales")
+                article.classList.add("tipoDestino", elemento.tipo)
+                article.setAttribute("destino", elemento.destino)
+                article.innerHTML = `
                     <span class="contenedorServicios">
                     <h3>${elemento.destino}</h3>
                     <h3>${elemento.tipo}</h3>
@@ -137,133 +132,122 @@ $("#btnBariloche").click(() => {
                     <p class="precioProducto">Precio: $${elemento.precio}</p>
                     <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
                     </span>
-                     `
-                    section.appendChild(article)
-                })
+                `
+                section.appendChild(article)
         }else{
             console.log("NOOOO Funciona!")
         }
-    }
+    })
 });
 
 $("#btnMendoza").click(() => {
-    for (elemento of inventario){
+    inventario.forEach((elemento) =>{
         if (botonMendoza == elemento.destino){
             console.log(Producto, "Mendoza")
             let filtrado = inventario.filter(elemento => elemento.destino == botonMendoza)
-            console.log(filtrado)
+            let inventarioFiltrado = [];
+            inventarioFiltrado.push(filtrado)
+            console.log(inventarioFiltrado)
             let article = document.createElement("article")
             article.innerHTML = ""
-            // servicioInventario(filtrado)
-                filtrado.forEach((elemento) => {
-                    let section = document.getElementById("paquetesPrincipales")
-                    article.classList.add("tipoDestino", elemento.tipo)
-                    article.setAttribute("destino", elemento.destino)
-                    article.innerHTML = `
-                    <span class="contenedorServicios">
-                    <h3>${elemento.destino}</h3>
-                    <h3>${elemento.tipo}</h3>
-                    <h5>${elemento.nombre}</h5>
-                    <p class="precioProducto">Precio: $${elemento.precio}</p>
-                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                    </span>
-                     `
-                    section.appendChild(article)
-                })
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+            `
+            section.appendChild(article)
         }else{
             console.log("NOOOO Funciona!")
         }
-    }
+    })
 });
 
 $("#btnSurArgentino").click(() => {
-    for (elemento of inventario){
+    inventario.forEach((elemento) =>{
         if (botonSurArgentino == elemento.destino){
             console.log(Producto, "Sur Argentino")
             let filtrado = inventario.filter(elemento => elemento.destino == botonSurArgentino)
             console.log(filtrado)
             let article = document.createElement("article")
             article.innerHTML = ""
-            // servicioInventario(filtrado)
-                filtrado.forEach((elemento) => {
-                    let section = document.getElementById("paquetesPrincipales")
-                    article.classList.add("tipoDestino", elemento.tipo)
-                    article.setAttribute("destino", elemento.destino)
-                    article.innerHTML = `
-                    <span class="contenedorServicios">
-                    <h3>${elemento.destino}</h3>
-                    <h3>${elemento.tipo}</h3>
-                    <h5>${elemento.nombre}</h5>
-                    <p class="precioProducto">Precio: $${elemento.precio}</p>
-                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                    </span>
-                     `
-                    section.appendChild(article)
-                })
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+                `
+            section.appendChild(article)
         }else{
             console.log("NOOOO Funciona!")
         }
-    }
+    })
 });
 
 $("#btnNorteArgentino").click(() => {
-    for (elemento of inventario){
+    inventario.forEach((elemento) =>{
         if (botonNorteArgentino == elemento.destino){
             console.log(Producto, "Norte Argentino")
             let filtrado = inventario.filter(elemento => elemento.destino == botonNorteArgentino)
             console.log(filtrado)
             let article = document.createElement("article")
             article.innerHTML = ""
-            // servicioInventario(filtrado)
-                filtrado.forEach((elemento) => {
-                    let section = document.getElementById("paquetesPrincipales")
-                    article.classList.add("tipoDestino", elemento.tipo)
-                    article.setAttribute("destino", elemento.destino)
-                    article.innerHTML = `
-                    <span class="contenedorServicios">
-                    <h3>${elemento.destino}</h3>
-                    <h3>${elemento.tipo}</h3>
-                    <h5>${elemento.nombre}</h5>
-                    <p class="precioProducto">Precio: $${elemento.precio}</p>
-                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                    </span>
-                     `
-                    section.appendChild(article)
-                })
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+            `
+            section.appendChild(article)
         }else{
             console.log("NOOOO Funciona!")
         }
-    }
+    })
 });
 
 $("#btnCataratas").click(() => {
-    for (elemento of inventario){
+    inventario.forEach((elemento) =>{
         if (botonCataratas == elemento.destino){
             console.log(Producto, "Cataratas")
             let filtrado = inventario.filter(elemento => elemento.destino == botonCataratas)
             console.log(filtrado)
             let article = document.createElement("article")
             article.innerHTML = ""
-            // servicioInventario(filtrado)
-                filtrado.forEach((elemento) => {
-                    let section = document.getElementById("paquetesPrincipales")
-                    article.classList.add("tipoDestino", elemento.tipo)
-                    article.setAttribute("destino", elemento.destino)
-                    article.innerHTML = `
-                    <span class="contenedorServicios">
-                    <h3>${elemento.destino}</h3>
-                    <h3>${elemento.tipo}</h3>
-                    <h5>${elemento.nombre}</h5>
-                    <p class="precioProducto">Precio: $${elemento.precio}</p>
-                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                    </span>
-                     `
-                    section.appendChild(article)
-                })
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+            `
+            section.appendChild(article)
         }else{
             console.log("NOOOO Funciona!")
         }
-    }
+    })
 });
 
 let carrito = [];
@@ -305,17 +289,12 @@ function agregarAlCarrito(id, cantidad) {
             </div>
         `  
         section.appendChild(span)
-        
-        // document.getElementById("elminar${servicioMarcado.idServicio}").onclick = remover();
-        
-        // function remover(){
-        //     span.remove()
-        //     carrito= carrito.filter((elemento)=> elemento.idServicio != servicioMarcado.idServicio)
-        //     localStorage.setItem("carrito", JSON.stringify(carrito)) 
-                
-        // actualizarCarrito()
-        // }
-}}
+
+        // if (servicioMarcado.nombreServicio == "Bus"){
+        //     (servicioMarcado.nombreServicio, "Avion").style.visibility = "hidden";
+        // } 
+    }       
+};
 
 // Funcion del BOTON "Remover" (Quitar producto del carrito)
 

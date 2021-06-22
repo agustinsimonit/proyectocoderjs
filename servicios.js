@@ -1,4 +1,4 @@
-// Datos de producto y generacion de Inventario.
+// Defino el objeto PRODUCTO
 
 class Producto {
     constructor(id, nombre, destino, precio, tipo, stock) {
@@ -38,6 +38,9 @@ class ServicioMarcado {
     }
     }
 }
+
+// Creacion de la Lista de Productos (Array)
+
 
 let inventario = [];
 
@@ -86,35 +89,172 @@ inventario.push(new Producto (052, "MP", "Cataratas", 650, "regimen", 30));
 inventario.push(new Producto (053, "PC", "Cataratas", 1100, "regimen", 30));
 inventario.push(new Producto (054, "con Exc", "Cataratas", 1500, "actividades", 30));
 inventario.push(new Producto (055, "sin Exc", "Cataratas", 0, "actividades", 30));
-console.log(inventario);
 
-servicioInventario(inventario)
 
-// Botones de cada servicio para agregar al carrito
+// Botones de cada destino, para agregar al carrito luego los productos necesarios.
 
-function servicioInventario(inventario){
-    inventario.forEach((elemento) => {
-        let section = document.getElementById("paquetesPrincipales")
-        let article = document.createElement("article")
-        article.classList.add("tipoDestino", elemento.tipo)
-        article.setAttribute("destino", elemento.destino)
-        article.innerHTML += `
-        <span class="contenedorServicios">
-        <h3>${elemento.destino}</h3>
-        <h3>${elemento.tipo}</h3>
-        <h5>${elemento.nombre}</h5>
-        <p class="precioProducto">Precio: $${elemento.precio}</p>
-        <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-        </span>
-         `
-        section.appendChild(article)
+let botonesDestinos = document.getElementById("botonDestinos")
+let contenedorBotonesServicios = document.createElement("div")
+contenedorBotonesServicios.classList.add("btnDestinos")
+contenedorBotonesServicios.innerHTML += `
+    <button id="btnBariloche" type="button" class="btn btn-primary" value="Bariloche">Bariloche</button>
+    <button id="btnMendoza" type="button" class="btn btn-primary" value="Mendoza">Mendoza</button>
+    <button id="btnSurArgentino" type="button" class="btn btn-primary" value="Sur Argentino">Sur Argentino</button>
+    <button id="btnNorteArgentino" type="button" class="btn btn-primary" value="Norte Argentino">Norte Argentino</button>
+    <button id="btnCataratas" type="button" class="btn btn-primary" value="Cataratas">Cataratas</button>
+`
+botonesDestinos.appendChild(contenedorBotonesServicios);
+
+let botonBariloche = document.getElementById("btnBariloche").value;
+let botonMendoza = document.getElementById("btnMendoza").value;
+let botonSurArgentino = document.getElementById("btnSurArgentino").value;
+let botonNorteArgentino = document.getElementById("btnNorteArgentino").value;
+let botonCataratas = document.getElementById("btnCataratas").value;
+
+$("#btnBariloche").click(() => {
+    inventario.forEach((elemento) =>{
+        if (botonBariloche == elemento.destino){
+            console.log(Producto, "Bariloche")
+            let filtrado = inventario.filter(elemento => elemento.destino == botonBariloche)
+            let inventarioFiltrado = [];
+            inventarioFiltrado.push(filtrado)
+            console.log(inventarioFiltrado)
+            let article = document.createElement("article")
+            article.innerHTML = ""
+                let section = document.getElementById("paquetesPrincipales")
+                article.classList.add("tipoDestino", elemento.tipo)
+                article.setAttribute("destino", elemento.destino)
+                article.innerHTML = `
+                    <span class="contenedorServicios">
+                    <h3>${elemento.destino}</h3>
+                    <h3>${elemento.tipo}</h3>
+                    <h5>${elemento.nombre}</h5>
+                    <p class="precioProducto">Precio: $${elemento.precio}</p>
+                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                    </span>
+                `
+                section.appendChild(article)
+        }else{
+            console.log("NOOOO Funciona!")
+        }
     })
-}
+});
+
+$("#btnMendoza").click(() => {
+    inventario.forEach((elemento) =>{
+        if (botonMendoza == elemento.destino){
+            console.log(Producto, "Mendoza")
+            let filtrado = inventario.filter(elemento => elemento.destino == botonMendoza)
+            let inventarioFiltrado = [];
+            inventarioFiltrado.push(filtrado)
+            console.log(inventarioFiltrado)
+            let article = document.createElement("article")
+            article.innerHTML = ""
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+            `
+            section.appendChild(article)
+        }else{
+            console.log("NOOOO Funciona!")
+        }
+    })
+});
+
+$("#btnSurArgentino").click(() => {
+    inventario.forEach((elemento) =>{
+        if (botonSurArgentino == elemento.destino){
+            console.log(Producto, "Sur Argentino")
+            let filtrado = inventario.filter(elemento => elemento.destino == botonSurArgentino)
+            console.log(filtrado)
+            let article = document.createElement("article")
+            article.innerHTML = ""
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+                `
+            section.appendChild(article)
+        }else{
+            console.log("NOOOO Funciona!")
+        }
+    })
+});
+
+$("#btnNorteArgentino").click(() => {
+    inventario.forEach((elemento) =>{
+        if (botonNorteArgentino == elemento.destino){
+            console.log(Producto, "Norte Argentino")
+            let filtrado = inventario.filter(elemento => elemento.destino == botonNorteArgentino)
+            console.log(filtrado)
+            let article = document.createElement("article")
+            article.innerHTML = ""
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+            `
+            section.appendChild(article)
+        }else{
+            console.log("NOOOO Funciona!")
+        }
+    })
+});
+
+$("#btnCataratas").click(() => {
+    inventario.forEach((elemento) =>{
+        if (botonCataratas == elemento.destino){
+            console.log(Producto, "Cataratas")
+            let filtrado = inventario.filter(elemento => elemento.destino == botonCataratas)
+            console.log(filtrado)
+            let article = document.createElement("article")
+            article.innerHTML = ""
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.innerHTML = `
+                <span class="contenedorServicios">
+                <h3>${elemento.destino}</h3>
+                <h3>${elemento.tipo}</h3>
+                <h5>${elemento.nombre}</h5>
+                <p class="precioProducto">Precio: $${elemento.precio}</p>
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                </span>
+            `
+            section.appendChild(article)
+        }else{
+            console.log("NOOOO Funciona!")
+        }
+    })
+});
 
 let carrito = [];
 let contadorCarrito = document.getElementById("contadorCarrito")
 let precioTotal = document.getElementById("precioTotal")
 
+// Funcion del BOTON "Seleccionar" (Agregar al carrito)
 
 function agregarAlCarrito(id, cantidad) {
     let agregarServicio = inventario.filter(elemento => elemento.id == id)[0]
@@ -140,7 +280,7 @@ function agregarAlCarrito(id, cantidad) {
         span.setAttribute("id", "productoEnCarrito")
         span.innerHTML += `
             <div id="divCompra">
-            <p>Servicio: ${servicioMarcado.tipoServicio} ${servicioMarcado.nombreServicio}</p>
+            <p style="font-size: 2em">Servicio: ${servicioMarcado.tipoServicio} ${servicioMarcado.nombreServicio}</p>
             <p>Precio: <input id="precio-${servicioMarcado.idServicio}" class="precio" value="${servicioMarcado.precio}" disabled></p>
             <p>Numero de pasajeros: <input type="number" min=1 id="cantidad-${servicioMarcado.idServicio}" class="cantidad" value=${servicioMarcado.cantidad}></p>
             <p id="error-${servicioMarcado.idServicio}"></p>
@@ -149,17 +289,14 @@ function agregarAlCarrito(id, cantidad) {
             </div>
         `  
         section.appendChild(span)
-        
-        // document.getElementById("elminar${servicioMarcado.idServicio}").onclick = remover();
-        
-        // function remover(){
-        //     span.remove()
-        //     carrito= carrito.filter((elemento)=> elemento.idServicio != servicioMarcado.idServicio)
-        //     localStorage.setItem("carrito", JSON.stringify(carrito)) 
-                
-        // actualizarCarrito()
-        // }
-}}
+
+        // if (servicioMarcado.nombreServicio == "Bus"){
+        //     (servicioMarcado.nombreServicio, "Avion").style.visibility = "hidden";
+        // } 
+    }       
+};
+
+// Funcion del BOTON "Remover" (Quitar producto del carrito)
 
 function remover(){
     let eliminarProducto = document.getElementById("productoEnCarrito")
@@ -189,15 +326,19 @@ if(cantidad > 0) {
 }
 }
 
+
+// Lo que deberias hacer es tomar el evento change y ahi tomar el valor del campo y multiplicarlo por el precio!! 
+// Y tambien especificar que servicio es (ahi te traes el titulo y listo)
+
 $("#cantidad").change(function (e) {
      subtotalCarrito(e)
      let id= e.target.id.split('-')[1];
      let cantidad = $("#cantidad-" + id).val();
 
      if(cantidad>0) {
-         $("#error-" + id).html(" ")
+        $("#error-" + id).html(" ")
      } else {
-         $("#subtotal-" + id).val(0)
+        $("#subtotal-" + id).val(0)
      }
  })
 

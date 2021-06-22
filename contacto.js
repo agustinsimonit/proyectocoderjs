@@ -48,7 +48,7 @@ div.innerHTML += `
 
                             <div class="form-group">
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg" onclick="enviarDatos()">ENVIAR</button>
+                                    <button class="btn btn-primary btn-lg" onclick="enviarDatos(event)">ENVIAR</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -61,7 +61,10 @@ div.innerHTML += `
 
 section.appendChild(div)
 
-function enviarDatos() {
+function enviarDatos(event) {
+
+    event.preventDefault()
+    
     let inputNombre = document.getElementById("fname").value;
     let inputApellido = document.getElementById("lname").value;
     let inputEmail = document.getElementById("email").value;
