@@ -124,7 +124,7 @@ function agregarAlCarrito(id, cantidad) {
         let id = servicioDisponible.idServicio
         servicioDisponible.cantidad = parseInt(servicioDisponible.cantidad) + 1
         $("#cantidad-" + id).val(servicioDisponible.cantidad)
-        $("subtotal-" + id).val(servicioDisponible.obtenerTotal())  
+        $("#subtotal-" + id).val(servicioDisponible.obtenerTotal())  
     } else {
         let cant = cantidad ? cantidad:1;
         let servicioMarcado = new ServicioMarcado(agregarServicio.destino, agregarServicio.id, agregarServicio.nombre, agregarServicio.precio, agregarServicio.tipo, cant)
@@ -135,30 +135,31 @@ function agregarAlCarrito(id, cantidad) {
         actualizarCarrito()
 
         let section = document.getElementById("divVerCompra")
-        let div= document.createElement("div")
-        div.classList.add("productoEnCarrito")
-        div.setAttribute("id", "productoEnCarrito")
-        div.innerHTML += `
+        let span= document.createElement("span")
+        span.classList.add("productoEnCarrito")
+        span.setAttribute("id", "productoEnCarrito")
+        span.innerHTML += `
+            <div id="divCompra">
             <p>Servicio: ${servicioMarcado.tipoServicio} ${servicioMarcado.nombreServicio}</p>
             <p>Precio: <input id="precio-${servicioMarcado.idServicio}" class="precio" value="${servicioMarcado.precio}" disabled></p>
-            <div><p>Numero de pasajeros: <input type="number" min=1 id="cantidad-${servicioMarcado.idServicio}" class="cantidad" value=${servicioMarcado.cantidad}></p>
+            <p>Numero de pasajeros: <input type="number" min=1 id="cantidad-${servicioMarcado.idServicio}" class="cantidad" value=${servicioMarcado.cantidad}></p>
             <p id="error-${servicioMarcado.idServicio}"></p>
+            <p>Subtotal Producto: <input id="subtotal-${servicioMarcado.idServicio}" class="subtotal" value=${servicioMarcado.obtenerTotal()} disabled></input>
+            <button id="elminar${servicioMarcado.idServicio}" class="btn btn-dark botonEliminar" onclick="remover()">Remover servicio</button>
             </div>
-            <p>Subtotal Producto: <input id="subtotal-${servicioMarcado.idServicio}" class="subtotal" value=${servicioMarcado.obtenerTotal()}></input>
-            <button id="elminar${servicioMarcado.idServicio}" class="botonEliminar" onclick="remover()"></button>
-        `
-        section.appendChild(div)
-
-        // botonEliminar.addEventListener("click", () => {
-        //     botonEliminar.parentElement.remove()
+        `  
+        section.appendChild(span)
+        
+        // document.getElementById("elminar${servicioMarcado.idServicio}").onclick = remover();
+        
+        // function remover(){
+        //     span.remove()
         //     carrito= carrito.filter((elemento)=> elemento.idServicio != servicioMarcado.idServicio)
-        //     localStorage.setItem("carrito", JSON.stringify(carrito))
-
-        actualizarCarrito()
-        // })
-
-    }
-}
+        //     localStorage.setItem("carrito", JSON.stringify(carrito)) 
+                
+        // actualizarCarrito()
+        // }
+}}
 
 function remover(){
     let eliminarProducto = document.getElementById("productoEnCarrito")
@@ -166,7 +167,7 @@ function remover(){
     carrito= carrito.filter((elemento)=> elemento.idServicio != servicioMarcado.idServicio)
     localStorage.setItem("carrito", JSON.stringify(carrito))   
     
-    actualizarCarrito()
+actualizarCarrito()
 }
 
 function subtotalCarrito(e){
@@ -190,7 +191,7 @@ if(cantidad > 0) {
 
 $("#cantidad").change(function (e) {
      subtotalCarrito(e)
-     let id= e.target.id.split("-")[1];
+     let id= e.target.id.split('-')[1];
      let cantidad = $("#cantidad-" + id).val();
 
      if(cantidad>0) {
@@ -200,12 +201,9 @@ $("#cantidad").change(function (e) {
      }
  })
 
- let subtotal = $("#subtotal").val()
+let subtotal = $("#subtotal").val()
 
 function actualizarCarrito() {
     contadorCarrito.innerText= carrito.length
     precioTotal.innerText= carrito.reduce((acc,el) => acc + el.obtenerTotal(), 0)
 }
-
-
-

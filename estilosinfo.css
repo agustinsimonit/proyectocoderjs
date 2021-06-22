@@ -1,0 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-right: 2em;
+}
+
+.horizontal li{
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.horizontal li a{
+    text-decoration: none;
+    font-weight: bold;  
+    color: black;
+}
+
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+.infoDestinos {
+    background-color: transparent;
+    position: fixed;
+    width: 100%;
+}
+.infoNav {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav-item {
+    list-style: none;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    cursor: pointer;
+}
+.nav-item.active::after {
+    content: '';
+    background: #FFF;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    display: inline-block;
+}
+section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section#bariloche {
+    background-color: #3d2cd8;
+    display: flex;
+    flex-direction: column;
+}
+section#mendoza {
+    background-color: rgb(139, 81, 187);
+    display: flex;
+    flex-direction: column;
+}
+section#norteargentino{
+    background-color: #7c4833;
+    display: flex;
+    flex-direction: column;
+}
+section#surargentino {
+    background-color: rgb(84, 113, 192);
+    display: flex;
+    flex-direction: column;
+}
+section#cataratas {
+    background-color: rgb(38, 165, 45);
+    display: flex;
+    flex-direction: column;
+}
