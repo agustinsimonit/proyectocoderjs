@@ -282,7 +282,7 @@ function agregarAlCarrito(id, cantidad) {
             <div id="divCompra">
             <p style="font-size: 2em">Servicio: ${servicioMarcado.tipoServicio} ${servicioMarcado.nombreServicio}</p>
             <p>Precio: <input id="precio-${servicioMarcado.idServicio}" class="precio" value="${servicioMarcado.precio}" disabled></p>
-            <p>Numero de pasajeros: <input type="number" min=1 id="cantidad-${servicioMarcado.idServicio}" class="cantidad" value=${servicioMarcado.cantidad}></p>
+            <p>Numero de pasajeros: <input type="number" min=1 id="cantidad-${servicioMarcado.idServicio}" class="cantidad" value=${servicioMarcado.cantidad} disabled></p>
             <p id="error-${servicioMarcado.idServicio}"></p>
             <p>Subtotal Producto: <input id="subtotal-${servicioMarcado.idServicio}" class="subtotal" value=${servicioMarcado.obtenerTotal()} disabled></input>
             <button id="elminar${servicioMarcado.idServicio}" class="btn btn-dark botonEliminar" onclick="remover()">Remover servicio</button>
@@ -293,6 +293,7 @@ function agregarAlCarrito(id, cantidad) {
         // if (servicioMarcado.nombreServicio == "Bus"){
         //     (servicioMarcado.nombreServicio, "Avion").style.visibility = "hidden";
         // } 
+
     }       
 };
 
@@ -301,29 +302,31 @@ function agregarAlCarrito(id, cantidad) {
 function remover(){
     let eliminarProducto = document.getElementById("productoEnCarrito")
     eliminarProducto.parentElement.remove()
-    carrito= carrito.filter((elemento)=> elemento.idServicio != servicioMarcado.idServicio)
+    carrito= carrito.filter((elemento)=> elemento.idServicio != carrito.idServicio)
     localStorage.setItem("carrito", JSON.stringify(carrito))   
     
 actualizarCarrito()
 }
 
+// Funcion del elemento "SUBTOTAL" (Marcar el precio del producto, segun la cantidad de elementos seleccionadas)
+
 function subtotalCarrito(e){
     let id= e.target.id.split("-")[1];
     let cantidad= $("#cantidad-" +id).val();
 
-carrito.find(el => el.idServicio == id).cantidad=cantidad;
-localStorage.setItem("carrito", JSON.stringify(carrito));
+    carrito.find(el => el.idServicio == id).cantidad=cantidad;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 
-if(cantidad > 0) {
-    let precio = $("#precio-" + id).val()
-    console.log(precio)
-    let subtotal = precio*parseInt(cantidad)
-    $("#subtotal-" + id).val(subtotal)
-    actualizarCarrito();
-    console.log(subtotal)
-} else {
-    $("#error-" + id).html("Seleccione una cantidad superior a 0")
-}
+    if(cantidad > 0) {
+        let precio = $("#precio-" + id).val()
+        console.log(precio)
+        let subtotal = precio*parseInt(cantidad)
+        $("#subtotal-" + id).val(subtotal)
+        actualizarCarrito();
+        console.log(subtotal)
+    } else {
+        $("#error-" + id).html("Seleccione una cantidad superior a 0")
+    }
 }
 
 
@@ -335,11 +338,11 @@ $("#cantidad").change(function (e) {
      let id= e.target.id.split('-')[1];
      let cantidad = $("#cantidad-" + id).val();
 
-     if(cantidad>0) {
+    if(cantidad>0) {
         $("#error-" + id).html(" ")
-     } else {
+    }else {
         $("#subtotal-" + id).val(0)
-     }
+    }
  })
 
 let subtotal = $("#subtotal").val()

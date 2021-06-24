@@ -64,4 +64,25 @@ a{
     padding-bottom: 2em;
 }
 
+.bienvenidoIndex{
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
 
+#apiClima{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 2em;
+}
+
+#apiClima button{
+    margin-bottom: 1em;
+    width: 50%;
+}
+
+.bienvenidoIndex h4{
+    padding-bottom: 2em;
+}
