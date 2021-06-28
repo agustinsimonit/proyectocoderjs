@@ -27,20 +27,19 @@ class Producto {
 
 class ServicioMarcado {
     constructor (destino, idServicio, nombreServicio, precio, tipoServicio, cantidad){
-    this.destino = destino;
-    this.idServicio = idServicio;
-    this.nombreServicio = nombreServicio;
-    this.precio = precio;
-    this.tipoServicio = tipoServicio;
-    this.cantidad = cantidad;
-    this.obtenerTotal = function(){
-        return this.cantidad * this.precio;
-    }
+        this.destino = destino;
+        this.idServicio = idServicio;
+        this.nombreServicio = nombreServicio;
+        this.precio = precio;
+        this.tipoServicio = tipoServicio;
+        this.cantidad = cantidad;
+        this.obtenerTotal = function(){
+            return this.cantidad * this.precio;
+        }
     }
 }
 
 // Creacion de la Lista de Productos (Array)
-
 
 let inventario = [];
 
@@ -92,11 +91,13 @@ inventario.push(new Producto (055, "sin Exc", "Cataratas", 0, "actividades", 30)
 
 
 // Botones de cada destino, para agregar al carrito luego los productos necesarios.
+// en HTML <!-- Botones para seleccion de destinos/paquetes-->
 
 let botonesDestinos = document.getElementById("botonDestinos")
 let contenedorBotonesServicios = document.createElement("div")
 contenedorBotonesServicios.classList.add("btnDestinos")
 contenedorBotonesServicios.innerHTML += `
+    <button id="btnBariloche2" data-id="btnBariloche2" type="button" class="btn btn-primary" value="Bariloche">Bariloche2</button>
     <button id="btnBariloche" type="button" class="btn btn-primary" value="Bariloche">Bariloche</button>
     <button id="btnMendoza" type="button" class="btn btn-primary" value="Mendoza">Mendoza</button>
     <button id="btnSurArgentino" type="button" class="btn btn-primary" value="Sur Argentino">Sur Argentino</button>
@@ -105,13 +106,18 @@ contenedorBotonesServicios.innerHTML += `
 `
 botonesDestinos.appendChild(contenedorBotonesServicios);
 
+let botonBariloche2 = document.getElementById("btnBariloche2").value;
 let botonBariloche = document.getElementById("btnBariloche").value;
 let botonMendoza = document.getElementById("btnMendoza").value;
 let botonSurArgentino = document.getElementById("btnSurArgentino").value;
 let botonNorteArgentino = document.getElementById("btnNorteArgentino").value;
 let botonCataratas = document.getElementById("btnCataratas").value;
 
-$("#btnBariloche").click(() => {
+// Botones para cada servicio (dentro de cada destino). Creacion del boton "agregar al carrito" = SELECCIONAR
+// en HTML <!-- Botones de detalle para la compra servicios y carrito-->
+
+$("#btnBariloche2").click(() => { 
+    // $("#paquetesPrincipales").fadeToggle("slow", "linear");{ 
     inventario.forEach((elemento) =>{
         if (botonBariloche == elemento.destino){
             console.log(Producto, "Bariloche")
@@ -124,8 +130,48 @@ $("#btnBariloche").click(() => {
                 let section = document.getElementById("paquetesPrincipales")
                 article.classList.add("tipoDestino", elemento.tipo)
                 article.setAttribute("destino", elemento.destino)
+                article.setAttribute("id", "btnBariloche2")
                 article.innerHTML = `
-                    <span class="contenedorServicios">
+                    <span class="contenedorServicios" id="btn1">
+                    <h3>${elemento.destino}</h3>
+                    <h3>${elemento.tipo}</h3>
+                    <h5>${elemento.nombre}</h5>
+                    <p class="precioProducto">Precio: $${elemento.precio}</p>
+                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                    </span>
+                `
+                section.appendChild(article)
+            actualizarCarrito();
+        }else{
+            console.log("NOOOO Funciona!")
+        }
+    })
+// }
+});
+
+$("#btnBariloche").click("slow", () => {
+
+    let botonDestinos = document.getElementById("botonDestinos")
+    let frase2 = document.createElement("h3")
+    $("#fraseUno").hide();
+    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(frase2)
+
+    inventario.forEach((elemento) =>{
+        if (botonBariloche == elemento.destino){
+            console.log(Producto, "Bariloche")
+            let filtrado = inventario.filter(elemento => elemento.destino == botonBariloche)
+            let inventarioFiltrado = [];
+            inventarioFiltrado.push(filtrado)
+            console.log(inventarioFiltrado)
+            let article = document.createElement("article")
+            article.innerHTML = ""
+                let section = document.getElementById("paquetesPrincipales")
+                article.classList.add("tipoDestino", elemento.tipo)
+                article.setAttribute("destino", elemento.destino)
+                article.setAttribute("id", "mostrarOcultar")
+                article.innerHTML = `
+                    <span class="contenedorServicios" id="btn1">
                     <h3>${elemento.destino}</h3>
                     <h3>${elemento.tipo}</h3>
                     <h5>${elemento.nombre}</h5>
@@ -255,6 +301,7 @@ let contadorCarrito = document.getElementById("contadorCarrito")
 let precioTotal = document.getElementById("precioTotal")
 
 // Funcion del BOTON "Seleccionar" (Agregar al carrito)
+// Funcion del BOTON "Remover" (Quitar producto del carrito)
 
 function agregarAlCarrito(id, cantidad) {
     let agregarServicio = inventario.filter(elemento => elemento.id == id)[0]
@@ -274,7 +321,7 @@ function agregarAlCarrito(id, cantidad) {
 
         actualizarCarrito()
 
-        let section = document.getElementById("divVerCompra")
+        let section = document.getElementById("divTemporal")
         let span= document.createElement("span")
         span.classList.add("productoEnCarrito")
         span.setAttribute("id", "productoEnCarrito")
@@ -285,30 +332,24 @@ function agregarAlCarrito(id, cantidad) {
             <p>Numero de pasajeros: <input type="number" min=1 id="cantidad-${servicioMarcado.idServicio}" class="cantidad" value=${servicioMarcado.cantidad} disabled></p>
             <p id="error-${servicioMarcado.idServicio}"></p>
             <p>Subtotal Producto: <input id="subtotal-${servicioMarcado.idServicio}" class="subtotal" value=${servicioMarcado.obtenerTotal()} disabled></input>
-            <button id="elminar${servicioMarcado.idServicio}" class="btn btn-dark botonEliminar" onclick="remover()">Remover servicio</button>
+            <button id="elminar${servicioMarcado.idServicio}" class="btn btn-dark botonEliminar" >Remover servicio</button>
             </div>
         `  
         section.appendChild(span)
 
-        // if (servicioMarcado.nombreServicio == "Bus"){
-        //     (servicioMarcado.nombreServicio, "Avion").style.visibility = "hidden";
-        // } 
-
+        let botonEliminar = document.getElementById(`elminar${servicioMarcado.idServicio}`)
+        botonEliminar.addEventListener('click', () =>{
+        let eliminarProducto = document.getElementById("productoEnCarrito")
+        eliminarProducto.remove()
+        carrito= carrito.filter((elemento)=> elemento.idServicio != servicioMarcado.idServicio)
+        localStorage.setItem("carrito", JSON.stringify(carrito)) 
+        actualizarCarrito()              
+        })
     }       
 };
 
-// Funcion del BOTON "Remover" (Quitar producto del carrito)
-
-function remover(){
-    let eliminarProducto = document.getElementById("productoEnCarrito")
-    eliminarProducto.parentElement.remove()
-    carrito= carrito.filter((elemento)=> elemento.idServicio != carrito.idServicio)
-    localStorage.setItem("carrito", JSON.stringify(carrito))   
-    
-actualizarCarrito()
-}
-
-// Funcion del elemento "SUBTOTAL" (Marcar el precio del producto, segun la cantidad de elementos seleccionadas)
+// Funcion del elemento "SUBTOTAL" (Marcar el precio del producto, segun la cantidad de elementos seleccionadas).
+// En HTML <!-- Ver compra y frase-->
 
 function subtotalCarrito(e){
     let id= e.target.id.split("-")[1];
@@ -343,7 +384,8 @@ $("#cantidad").change(function (e) {
     }else {
         $("#subtotal-" + id).val(0)
     }
- })
+    actualizarCarrito();
+})
 
 let subtotal = $("#subtotal").val()
 
@@ -351,3 +393,59 @@ function actualizarCarrito() {
     contadorCarrito.innerText= carrito.length
     precioTotal.innerText= carrito.reduce((acc,el) => acc + el.obtenerTotal(), 0)
 }
+
+
+let finalizarCompra = document.getElementById("resumenCompra")
+let botonFinalizarCompra = document.createElement("div")
+botonFinalizarCompra.classList.add("btnFinalizar")
+botonFinalizarCompra.innerHTML += `
+    <button id="finCompra" type="button" class="btn btn-primary">FINALIZAR COMPRA</button>
+`
+finalizarCompra.appendChild(botonFinalizarCompra);
+
+let cantidad = $("#cantidad-").val();
+if (cantidad < 1){
+    document.getElementById("finCompra").style.visibility = "hidden";
+} else {
+    document.getElementById("finCompra").style.visibility = "visible";
+}
+
+$("#finCompra").click (() => {
+    for(elem of carrito) {
+        let resumenFinalCompra = document.createElement("div")
+        resumenFinalCompra.innerHTML = `
+            <table class="tablaCompra">
+                <caption>DESTINO: ${elem.destino}</caption>
+                    <tr>
+                        <th>TIPO:</th>
+                        <th>NOMBRE:</th>
+                        <th>CANTIDAD:</th>
+                        <th>SUBTOTAL:</th>
+                    </tr>
+                    <tr>
+                        <td>${elem.tipoServicio}</td>
+                        <td>${elem.nombreServicio}</td>
+                        <td>${elem.cantidad}</td>
+                        <td>${elem.obtenerTotal()}</td>
+                    </tr>
+            </table> 
+            `  
+        finalizarCompra.appendChild(resumenFinalCompra);
+    }
+    let btnFinCompra = document.getElementById("finCompra")
+    let section = document.getElementById("divTemporal")
+    section.remove();
+    btnFinCompra.remove();
+})
+
+// Ejemplo de Funcion TOOGLE
+
+// function logItem(e) {
+//     const item = document.querySelector(`[data-id=${e.target.id}]`);
+//     item.toggleAttribute('hidden');
+// }
+
+// const chapters = document.querySelectorAll('article');
+// chapters.forEach((chapter) => {
+//     chapter.addEventListener('toggle', logItem);
+// })
