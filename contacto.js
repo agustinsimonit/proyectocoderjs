@@ -1,4 +1,4 @@
-// Aqui desarrollamos el Formulario de Contacto
+// Aqui desarrollamos el Formulario de Contacto desde JS.
 
 let section = document.getElementById("formContacto");
 let div = document.createElement("div")
@@ -60,6 +60,8 @@ div.innerHTML += `
     `  
 
 section.appendChild(div)
+
+// Envento del "click". Removemos el Formulario y dejamos detalle de los datos.
 
 function enviarDatos(event) {
 

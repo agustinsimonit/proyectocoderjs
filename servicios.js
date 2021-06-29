@@ -117,8 +117,20 @@ let botonCataratas = document.getElementById("btnCataratas").value;
 $("#btnBariloche").click(() => {
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
+    let btnOcultarServ = document.createElement("button")
+    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
+    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
     $("#fraseUno").hide();
+    $("#btnBariloche").hide();
+    btnOcultarServ.addEventListener('click', () =>{
+        $("#btnBariloche").show();
+        $("#paquetesPrincipales").hide();
+        frase2.remove();
+        $("#fraseUno").show();
+        btnOcultarServ.remove();
+    });
     frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(btnOcultarServ)
     botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonBariloche == elemento.destino){
@@ -128,32 +140,43 @@ $("#btnBariloche").click(() => {
             inventarioFiltrado.push(filtrado)
             console.log(inventarioFiltrado)
             let article = document.createElement("article")
-            article.innerHTML = ""
-                let section = document.getElementById("paquetesPrincipales")
-                article.classList.add("tipoDestino", elemento.tipo)
-                article.setAttribute("destino", elemento.destino)
-                article.setAttribute("id", "mostrarOcultar")
-                article.innerHTML = `
-                    <span class="contenedorServicios" id="btn1">
+            let section = document.getElementById("paquetesPrincipales")
+            article.classList.add("tipoDestino", elemento.tipo)
+            article.setAttribute("destino", elemento.destino)
+            article.setAttribute("id", "mostrarOcultar")
+            article.innerHTML = `
+                <span class="contenedorServicios" id="btn1">
                     <h3>${elemento.destino}</h3>
                     <h3>${elemento.tipo}</h3>
                     <h5>${elemento.nombre}</h5>
                     <p class="precioProducto">Precio: $${elemento.precio}</p>
                     <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                    </span>
+                </span>
                 `
-                section.appendChild(article)
+            section.appendChild(article)
         }else{
             console.log("NOOOO Funciona!")
         }
     })
+    $("#paquetesPrincipales").show();
 });
 
 $("#btnMendoza").click(() => {
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
+    let btnOcultarServ = document.createElement("button")
+    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
+    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
     $("#fraseUno").hide();
+    $("#btnMendoza").hide();
+    btnOcultarServ.addEventListener('click', () =>{
+        $("#btnMendoza").show();
+        $("#paquetesPrincipales").hide();
+        frase2.remove();
+        btnOcultarServ.remove();
+    });
     frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(btnOcultarServ)
     botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonMendoza == elemento.destino){
@@ -181,13 +204,25 @@ $("#btnMendoza").click(() => {
             console.log("NOOOO Funciona!")
         }
     })
+    $("#paquetesPrincipales").show();
 });
 
 $("#btnSurArgentino").click(() => {
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
+    let btnOcultarServ = document.createElement("button")
+    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
+    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
     $("#fraseUno").hide();
+    $("#btnSurArgentino").hide();
+    btnOcultarServ.addEventListener('click', () =>{
+        $("#btnSurArgentino").show();
+        $("#paquetesPrincipales").hide();
+        frase2.remove();
+        btnOcultarServ.remove();
+    });
     frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(btnOcultarServ)
     botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonSurArgentino == elemento.destino){
@@ -213,13 +248,25 @@ $("#btnSurArgentino").click(() => {
             console.log("NOOOO Funciona!")
         }
     })
+    $("#paquetesPrincipales").show();
 });
 
 $("#btnNorteArgentino").click(() => {
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
+    let btnOcultarServ = document.createElement("button")
+    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
+    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
     $("#fraseUno").hide();
+    $("#btnNorteArgentino").hide();
+    btnOcultarServ.addEventListener('click', () =>{
+        $("#btnNorteArgentino").show();
+        $("#paquetesPrincipales").hide();
+        frase2.remove();
+        btnOcultarServ.remove();
+    });
     frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(btnOcultarServ)
     botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonNorteArgentino == elemento.destino){
@@ -245,13 +292,25 @@ $("#btnNorteArgentino").click(() => {
             console.log("NOOOO Funciona!")
         }
     })
+    $("#paquetesPrincipales").show();
 });
 
 $("#btnCataratas").click(() => {
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
+    let btnOcultarServ = document.createElement("button")
+    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
+    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
     $("#fraseUno").hide();
+    $("#btnCataratas").hide();
+    btnOcultarServ.addEventListener('click', () =>{
+        $("#btnCataratas").show();
+        $("#paquetesPrincipales").hide();
+        frase2.remove();
+        btnOcultarServ.remove();
+    });
     frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(btnOcultarServ)
     botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonCataratas == elemento.destino){
@@ -277,6 +336,7 @@ $("#btnCataratas").click(() => {
             console.log("NOOOO Funciona!")
         }
     })
+    $("#paquetesPrincipales").show();
 });
 
 let carrito = [];
@@ -332,7 +392,7 @@ function agregarAlCarrito(id, cantidad) {
 };
 
 // Funcion del elemento "SUBTOTAL" (Marcar el precio del producto, segun la cantidad de elementos seleccionadas).
-// En HTML <!-- Ver compra y frase-->
+// En HTML <!-- Informacion temporal de la compra-->
 
 function subtotalCarrito(e){
     let id= e.target.id.split("-")[1];
@@ -354,9 +414,6 @@ function subtotalCarrito(e){
 }
 
 
-// Lo que deberias hacer es tomar el evento change y ahi tomar el valor del campo y multiplicarlo por el precio!! 
-// Y tambien especificar que servicio es (ahi te traes el titulo y listo)
-
 $("#cantidad").change(function (e) {
      subtotalCarrito(e)
      let id= e.target.id.split('-')[1];
@@ -372,11 +429,15 @@ $("#cantidad").change(function (e) {
 
 let subtotal = $("#subtotal").val()
 
+// Funcion "Actualizar Carrito". Refresh de la info refente al PRECIO TOTAL y CANTIDAD DE SERVICIOS SELECCIONADOS.
+
 function actualizarCarrito() {
     contadorCarrito.innerText= carrito.length
     precioTotal.innerText= carrito.reduce((acc,el) => acc + el.obtenerTotal(), 0)
 }
 
+// Creacion de boton "Finalizar compra". Ofrece el resumen de la compra y remueve la informacion temporal.
+// en HTML <!-- Resumen de la compra-->
 
 let finalizarCompra = document.getElementById("resumenCompra")
 let botonFinalizarCompra = document.createElement("div")
@@ -421,14 +482,3 @@ $("#finCompra").click (() => {
     btnFinCompra.remove();
 })
 
-// Ejemplo de Funcion TOOGLE
-
-// function logItem(e) {
-//     const item = document.querySelector(`[data-id=${e.target.id}]`);
-//     item.toggleAttribute('hidden');
-// }
-
-// const chapters = document.querySelectorAll('article');
-// chapters.forEach((chapter) => {
-//     chapter.addEventListener('toggle', logItem);
-// })

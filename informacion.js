@@ -1,3 +1,5 @@
+// Creacion de "Scroll" con informacion de cada destino.
+
 window.onload = () => {
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content');  window.addEventListener('scroll', () => {
