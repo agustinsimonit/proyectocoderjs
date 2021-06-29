@@ -115,13 +115,11 @@ let botonCataratas = document.getElementById("btnCataratas").value;
 // en HTML <!-- Botones de detalle para la compra servicios y carrito-->
 
 $("#btnBariloche").click(() => {
-    $("#paquetesPrincipales").toggle("slow");
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
     $("#fraseUno").hide();
     frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
     botonDestinos.appendChild(frase2)
-
     inventario.forEach((elemento) =>{
         if (botonBariloche == elemento.destino){
             console.log(Producto, "Bariloche")
@@ -152,7 +150,11 @@ $("#btnBariloche").click(() => {
 });
 
 $("#btnMendoza").click(() => {
-    $("#paquetesPrincipales").toggle("slow");
+    let botonDestinos = document.getElementById("botonDestinos")
+    let frase2 = document.createElement("h3")
+    $("#fraseUno").hide();
+    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonMendoza == elemento.destino){
             console.log(Producto, "Mendoza")
@@ -182,7 +184,11 @@ $("#btnMendoza").click(() => {
 });
 
 $("#btnSurArgentino").click(() => {
-    $("#paquetesPrincipales").toggle("slow");
+    let botonDestinos = document.getElementById("botonDestinos")
+    let frase2 = document.createElement("h3")
+    $("#fraseUno").hide();
+    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonSurArgentino == elemento.destino){
             console.log(Producto, "Sur Argentino")
@@ -210,7 +216,11 @@ $("#btnSurArgentino").click(() => {
 });
 
 $("#btnNorteArgentino").click(() => {
-    $("#paquetesPrincipales").toggle("slow");
+    let botonDestinos = document.getElementById("botonDestinos")
+    let frase2 = document.createElement("h3")
+    $("#fraseUno").hide();
+    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonNorteArgentino == elemento.destino){
             console.log(Producto, "Norte Argentino")
@@ -238,7 +248,11 @@ $("#btnNorteArgentino").click(() => {
 });
 
 $("#btnCataratas").click(() => {
-    $("#paquetesPrincipales").toggle("slow");
+    let botonDestinos = document.getElementById("botonDestinos")
+    let frase2 = document.createElement("h3")
+    $("#fraseUno").hide();
+    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
+    botonDestinos.appendChild(frase2)
     inventario.forEach((elemento) =>{
         if (botonCataratas == elemento.destino){
             console.log(Producto, "Cataratas")
