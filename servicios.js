@@ -97,7 +97,6 @@ let botonesDestinos = document.getElementById("botonDestinos")
 let contenedorBotonesServicios = document.createElement("div")
 contenedorBotonesServicios.classList.add("btnDestinos")
 contenedorBotonesServicios.innerHTML += `
-    <button id="btnBariloche2" data-id="btnBariloche2" type="button" class="btn btn-primary" value="Bariloche">Bariloche2</button>
     <button id="btnBariloche" type="button" class="btn btn-primary" value="Bariloche">Bariloche</button>
     <button id="btnMendoza" type="button" class="btn btn-primary" value="Mendoza">Mendoza</button>
     <button id="btnSurArgentino" type="button" class="btn btn-primary" value="Sur Argentino">Sur Argentino</button>
@@ -106,7 +105,6 @@ contenedorBotonesServicios.innerHTML += `
 `
 botonesDestinos.appendChild(contenedorBotonesServicios);
 
-let botonBariloche2 = document.getElementById("btnBariloche2").value;
 let botonBariloche = document.getElementById("btnBariloche").value;
 let botonMendoza = document.getElementById("btnMendoza").value;
 let botonSurArgentino = document.getElementById("btnSurArgentino").value;
@@ -116,41 +114,8 @@ let botonCataratas = document.getElementById("btnCataratas").value;
 // Botones para cada servicio (dentro de cada destino). Creacion del boton "agregar al carrito" = SELECCIONAR
 // en HTML <!-- Botones de detalle para la compra servicios y carrito-->
 
-$("#btnBariloche2").click(() => { 
-    // $("#paquetesPrincipales").fadeToggle("slow", "linear");{ 
-    inventario.forEach((elemento) =>{
-        if (botonBariloche == elemento.destino){
-            console.log(Producto, "Bariloche")
-            let filtrado = inventario.filter(elemento => elemento.destino == botonBariloche)
-            let inventarioFiltrado = [];
-            inventarioFiltrado.push(filtrado)
-            console.log(inventarioFiltrado)
-            let article = document.createElement("article")
-            article.innerHTML = ""
-                let section = document.getElementById("paquetesPrincipales")
-                article.classList.add("tipoDestino", elemento.tipo)
-                article.setAttribute("destino", elemento.destino)
-                article.setAttribute("id", "btnBariloche2")
-                article.innerHTML = `
-                    <span class="contenedorServicios" id="btn1">
-                    <h3>${elemento.destino}</h3>
-                    <h3>${elemento.tipo}</h3>
-                    <h5>${elemento.nombre}</h5>
-                    <p class="precioProducto">Precio: $${elemento.precio}</p>
-                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                    </span>
-                `
-                section.appendChild(article)
-            actualizarCarrito();
-        }else{
-            console.log("NOOOO Funciona!")
-        }
-    })
-// }
-});
-
-$("#btnBariloche").click("slow", () => {
-
+$("#btnBariloche").click(() => {
+    $("#paquetesPrincipales").toggle("slow");
     let botonDestinos = document.getElementById("botonDestinos")
     let frase2 = document.createElement("h3")
     $("#fraseUno").hide();
@@ -187,6 +152,7 @@ $("#btnBariloche").click("slow", () => {
 });
 
 $("#btnMendoza").click(() => {
+    $("#paquetesPrincipales").toggle("slow");
     inventario.forEach((elemento) =>{
         if (botonMendoza == elemento.destino){
             console.log(Producto, "Mendoza")
@@ -216,6 +182,7 @@ $("#btnMendoza").click(() => {
 });
 
 $("#btnSurArgentino").click(() => {
+    $("#paquetesPrincipales").toggle("slow");
     inventario.forEach((elemento) =>{
         if (botonSurArgentino == elemento.destino){
             console.log(Producto, "Sur Argentino")
@@ -243,6 +210,7 @@ $("#btnSurArgentino").click(() => {
 });
 
 $("#btnNorteArgentino").click(() => {
+    $("#paquetesPrincipales").toggle("slow");
     inventario.forEach((elemento) =>{
         if (botonNorteArgentino == elemento.destino){
             console.log(Producto, "Norte Argentino")
@@ -270,6 +238,7 @@ $("#btnNorteArgentino").click(() => {
 });
 
 $("#btnCataratas").click(() => {
+    $("#paquetesPrincipales").toggle("slow");
     inventario.forEach((elemento) =>{
         if (botonCataratas == elemento.destino){
             console.log(Producto, "Cataratas")
