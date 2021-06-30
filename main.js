@@ -155,27 +155,5 @@ $("#botonPaisMex").click(() => {
 })
 
 
-// Creamos el boton de "CLIMA" que nos vincula a la API https://weatherstack.com/ 
-
-// $("#botonClima").click(() => {
-//     $.ajax({
-//         url: 'https://api.weatherstack.com/current',
-//         data: {
-//         access_key: 'f31ebf99f8c3d39af6065921256e1bfd',
-//         query: 'New York'
-//         },
-//         dataType: 'json',
-//         success: function(apiResponse) {
-//         // console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
-//         let divClima = document.getElementById("apiClima")
-//         let showClima = document. createElement("div")
-//         showClima.innerHTML = `
-//             <h4>El clima en ${apiResponse.location.name} es ${apiResponse.current.temperature}</h4>
-//         `
-//         divClima.appendChild(showClima)
-//         $("#botonClima").fadeOut("4000")
-//         }
-//     })
-// })
 
 

@@ -90,106 +90,22 @@ inventario.push(new Producto (054, "con Exc", "Cataratas", 1500, "actividades", 
 inventario.push(new Producto (055, "sin Exc", "Cataratas", 0, "actividades", 30));
 
 
-// Botones de cada destino, para agregar al carrito luego los productos necesarios.
-// en HTML <!-- Botones para seleccion de destinos/paquetes-->
-
-let botonesDestinos = document.getElementById("botonDestinos")
-let contenedorBotonesServicios = document.createElement("div")
-contenedorBotonesServicios.classList.add("btnDestinos")
-contenedorBotonesServicios.innerHTML += `
-    <button id="btnBariloche" type="button" class="btn btn-primary" value="Bariloche">Bariloche</button>
-    <button id="btnMendoza" type="button" class="btn btn-primary" value="Mendoza">Mendoza</button>
-    <button id="btnSurArgentino" type="button" class="btn btn-primary" value="Sur Argentino">Sur Argentino</button>
-    <button id="btnNorteArgentino" type="button" class="btn btn-primary" value="Norte Argentino">Norte Argentino</button>
-    <button id="btnCataratas" type="button" class="btn btn-primary" value="Cataratas">Cataratas</button>
-`
-botonesDestinos.appendChild(contenedorBotonesServicios);
-
-let botonBariloche = document.getElementById("btnBariloche").value;
-let botonMendoza = document.getElementById("btnMendoza").value;
-let botonSurArgentino = document.getElementById("btnSurArgentino").value;
-let botonNorteArgentino = document.getElementById("btnNorteArgentino").value;
-let botonCataratas = document.getElementById("btnCataratas").value;
-
 // Botones para cada servicio (dentro de cada destino). Creacion del boton "agregar al carrito" = SELECCIONAR
 // en HTML <!-- Botones de detalle para la compra servicios y carrito-->
 
-$("#btnBariloche").click(() => {
-    let botonDestinos = document.getElementById("botonDestinos")
-    let frase2 = document.createElement("h3")
-    let btnOcultarServ = document.createElement("button")
-    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
-    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
-    $("#fraseUno").hide();
-    $("#btnBariloche").hide();
-    btnOcultarServ.addEventListener('click', () =>{
-        $("#btnBariloche").show();
-        $("#paquetesPrincipales").hide();
-        frase2.remove();
-        $("#fraseUno").show();
-        btnOcultarServ.remove();
-    });
-    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
-    botonDestinos.appendChild(btnOcultarServ)
-    botonDestinos.appendChild(frase2)
-    inventario.forEach((elemento) =>{
-        if (botonBariloche == elemento.destino){
-            console.log(Producto, "Bariloche")
-            let filtrado = inventario.filter(elemento => elemento.destino == botonBariloche)
-            let inventarioFiltrado = [];
-            inventarioFiltrado.push(filtrado)
-            console.log(inventarioFiltrado)
-            let article = document.createElement("article")
-            let section = document.getElementById("paquetesPrincipales")
-            article.classList.add("tipoDestino", elemento.tipo)
-            article.setAttribute("destino", elemento.destino)
-            article.setAttribute("id", "mostrarOcultar")
-            article.innerHTML = `
-                <span class="contenedorServicios" id="btn1">
-                    <h3>${elemento.destino}</h3>
-                    <h3>${elemento.tipo}</h3>
-                    <h5>${elemento.nombre}</h5>
-                    <p class="precioProducto">Precio: $${elemento.precio}</p>
-                    <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                </span>
-                `
-            section.appendChild(article)
-        }else{
-            console.log("NOOOO Funciona!")
-        }
-    })
-    $("#paquetesPrincipales").show();
-});
+let completar = function(destino) {
 
-$("#btnMendoza").click(() => {
-    let botonDestinos = document.getElementById("botonDestinos")
-    let frase2 = document.createElement("h3")
-    let btnOcultarServ = document.createElement("button")
-    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
-    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
-    $("#fraseUno").hide();
-    $("#btnMendoza").hide();
-    btnOcultarServ.addEventListener('click', () =>{
-        $("#btnMendoza").show();
-        $("#paquetesPrincipales").hide();
-        frase2.remove();
-        btnOcultarServ.remove();
-    });
-    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
-    botonDestinos.appendChild(btnOcultarServ)
-    botonDestinos.appendChild(frase2)
-    inventario.forEach((elemento) =>{
-        if (botonMendoza == elemento.destino){
-            console.log(Producto, "Mendoza")
-            let filtrado = inventario.filter(elemento => elemento.destino == botonMendoza)
-            let inventarioFiltrado = [];
-            inventarioFiltrado.push(filtrado)
-            console.log(inventarioFiltrado)
-            let article = document.createElement("article")
-            article.innerHTML = ""
-            let section = document.getElementById("paquetesPrincipales")
-            article.classList.add("tipoDestino", elemento.tipo)
-            article.setAttribute("destino", elemento.destino)
+    let section = document.getElementById("paquetesPrincipales");
+
+    let filtrado = inventario.filter(elemento => elemento.destino == destino);
+    
+    filtrado.forEach((elemento) => {
+
+            let article = document.createElement("article");
+            article.innerHTML = "";
+            
+            article.classList.add("tipoDestino", elemento.tipo);
+            article.setAttribute("destino", elemento.destino);
             article.innerHTML = `
                 <span class="contenedorServicios">
                 <h3>${elemento.destino}</h3>
@@ -198,146 +114,49 @@ $("#btnMendoza").click(() => {
                 <p class="precioProducto">Precio: $${elemento.precio}</p>
                 <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
                 </span>
-            `
-            section.appendChild(article)
-        }else{
-            console.log("NOOOO Funciona!")
-        }
-    })
+            `;
+            section.appendChild(article);
+
+    });
+
     $("#paquetesPrincipales").show();
+
+}
+
+$(document).ready(()=>{    
+    $("#btnOcultarServ").hide();
+    $("#fraseDos").hide();
 });
 
-$("#btnSurArgentino").click(() => {
-    let botonDestinos = document.getElementById("botonDestinos")
-    let frase2 = document.createElement("h3")
-    let btnOcultarServ = document.createElement("button")
-    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
-    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
-    $("#fraseUno").hide();
-    $("#btnSurArgentino").hide();
-    btnOcultarServ.addEventListener('click', () =>{
-        $("#btnSurArgentino").show();
-        $("#paquetesPrincipales").hide();
-        frase2.remove();
-        btnOcultarServ.remove();
-    });
-    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
-    botonDestinos.appendChild(btnOcultarServ)
-    botonDestinos.appendChild(frase2)
-    inventario.forEach((elemento) =>{
-        if (botonSurArgentino == elemento.destino){
-            console.log(Producto, "Sur Argentino")
-            let filtrado = inventario.filter(elemento => elemento.destino == botonSurArgentino)
-            console.log(filtrado)
-            let article = document.createElement("article")
-            article.innerHTML = ""
-            let section = document.getElementById("paquetesPrincipales")
-            article.classList.add("tipoDestino", elemento.tipo)
-            article.setAttribute("destino", elemento.destino)
-            article.innerHTML = `
-                <span class="contenedorServicios">
-                <h3>${elemento.destino}</h3>
-                <h3>${elemento.tipo}</h3>
-                <h5>${elemento.nombre}</h5>
-                <p class="precioProducto">Precio: $${elemento.precio}</p>
-                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                </span>
-                `
-            section.appendChild(article)
-        }else{
-            console.log("NOOOO Funciona!")
-        }
-    })
-    $("#paquetesPrincipales").show();
+$("#btnOcultarServ").click(() => {    
+
+    $("#paquetesPrincipales").empty();
+
+    $("#fraseUno").show();
+    $("#fraseDos").hide();
+
+    $("#btnOcultarServ").hide();
+    $(".btn-menu").show();
+
 });
 
-$("#btnNorteArgentino").click(() => {
-    let botonDestinos = document.getElementById("botonDestinos")
-    let frase2 = document.createElement("h3")
-    let btnOcultarServ = document.createElement("button")
-    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
-    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
+$(".btn-menu").click((element) => {
+
+    let boton = $("#" + element.target.id);
+    $(".btn-menu").show();
+    boton.hide();    
+
+    $("#btnOcultarServ").show(); 
+    
     $("#fraseUno").hide();
-    $("#btnNorteArgentino").hide();
-    btnOcultarServ.addEventListener('click', () =>{
-        $("#btnNorteArgentino").show();
-        $("#paquetesPrincipales").hide();
-        frase2.remove();
-        btnOcultarServ.remove();
-    });
-    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
-    botonDestinos.appendChild(btnOcultarServ)
-    botonDestinos.appendChild(frase2)
-    inventario.forEach((elemento) =>{
-        if (botonNorteArgentino == elemento.destino){
-            console.log(Producto, "Norte Argentino")
-            let filtrado = inventario.filter(elemento => elemento.destino == botonNorteArgentino)
-            console.log(filtrado)
-            let article = document.createElement("article")
-            article.innerHTML = ""
-            let section = document.getElementById("paquetesPrincipales")
-            article.classList.add("tipoDestino", elemento.tipo)
-            article.setAttribute("destino", elemento.destino)
-            article.innerHTML = `
-                <span class="contenedorServicios">
-                <h3>${elemento.destino}</h3>
-                <h3>${elemento.tipo}</h3>
-                <h5>${elemento.nombre}</h5>
-                <p class="precioProducto">Precio: $${elemento.precio}</p>
-                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                </span>
-            `
-            section.appendChild(article)
-        }else{
-            console.log("NOOOO Funciona!")
-        }
-    })
-    $("#paquetesPrincipales").show();
+    $("#fraseDos").show();
+
+    $("#paquetesPrincipales").empty();
+
+    completar(document.getElementById(element.target.id).value);
+
 });
 
-$("#btnCataratas").click(() => {
-    let botonDestinos = document.getElementById("botonDestinos")
-    let frase2 = document.createElement("h3")
-    let btnOcultarServ = document.createElement("button")
-    btnOcultarServ.innerText = "OCULTAR SERVICIOS"
-    btnOcultarServ.setAttribute = ("id", "btnOcultarServ")
-    $("#fraseUno").hide();
-    $("#btnCataratas").hide();
-    btnOcultarServ.addEventListener('click', () =>{
-        $("#btnCataratas").show();
-        $("#paquetesPrincipales").hide();
-        frase2.remove();
-        btnOcultarServ.remove();
-    });
-    frase2.innerText = "A continuacion, seleccione el servicio. Recuerde que por cada click, se adicionar un nuevo pasajero" 
-    botonDestinos.appendChild(btnOcultarServ)
-    botonDestinos.appendChild(frase2)
-    inventario.forEach((elemento) =>{
-        if (botonCataratas == elemento.destino){
-            console.log(Producto, "Cataratas")
-            let filtrado = inventario.filter(elemento => elemento.destino == botonCataratas)
-            console.log(filtrado)
-            let article = document.createElement("article")
-            article.innerHTML = ""
-            let section = document.getElementById("paquetesPrincipales")
-            article.classList.add("tipoDestino", elemento.tipo)
-            article.setAttribute("destino", elemento.destino)
-            article.innerHTML = `
-                <span class="contenedorServicios">
-                <h3>${elemento.destino}</h3>
-                <h3>${elemento.tipo}</h3>
-                <h5>${elemento.nombre}</h5>
-                <p class="precioProducto">Precio: $${elemento.precio}</p>
-                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
-                </span>
-            `
-            section.appendChild(article)
-        }else{
-            console.log("NOOOO Funciona!")
-        }
-    })
-    $("#paquetesPrincipales").show();
-});
 
 let carrito = [];
 let contadorCarrito = document.getElementById("contadorCarrito")
@@ -349,7 +168,7 @@ let precioTotal = document.getElementById("precioTotal")
 function agregarAlCarrito(id, cantidad) {
     let agregarServicio = inventario.filter(elemento => elemento.id == id)[0]
     let servicioDisponible = carrito.find(elemento => elemento.idServicio == agregarServicio.id)
-    
+
     if (servicioDisponible) {
         let id = servicioDisponible.idServicio
         servicioDisponible.cantidad = parseInt(servicioDisponible.cantidad) + 1

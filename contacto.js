@@ -15,20 +15,20 @@ div.innerHTML += `
                             <div class="form-group">
                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                                 <div class="col-md-8">
-                                    <input id="fname" name="name" type="text" placeholder="Nombre*" class="form-control">
+                                    <input id="fname" name="name" type="text" placeholder="Nombre*" class="form-control" minlength="1" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                                 <div class="col-md-8">
-                                    <input id="lname" name="name" type="text" placeholder="Apellido*" class="form-control">
+                                    <input id="lname" name="name" type="text" placeholder="Apellido*" class="form-control" minlength="1" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
                                 <div class="col-md-8">
-                                    <input id="email" name="email" type="text" placeholder="Email*" class="form-control">
+                                    <input id="email" name="email" type="text" placeholder="Email*" class="form-control" minlength="1" required>
                                 </div>
                             </div>
 
@@ -62,6 +62,7 @@ div.innerHTML += `
 section.appendChild(div)
 
 // Envento del "click". Removemos el Formulario y dejamos detalle de los datos.
+// Ademas, guardamos los datos del Usuario en el local storage
 
 function enviarDatos(event) {
 
@@ -89,8 +90,15 @@ function enviarDatos(event) {
         formulario.appendChild(datosContacto)
         $("#formContacto").fadeOut("3000");
         $("#datosObtenidos").fadeIn("3000");
+
+        localStorage.setItem("inputNombre", JSON.stringify(inputNombre));
+        localStorage.setItem("inputApellido", JSON.stringify(inputApellido));
+        localStorage.setItem("inputEmail", JSON.stringify(inputEmail));
+        localStorage.setItem("inputTelefono", JSON.stringify(inputTelefono));
     }else{
         console.log("Faltan datos obligatorios")
     }
 }
+
+
 
