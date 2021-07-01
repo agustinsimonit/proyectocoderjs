@@ -112,11 +112,10 @@ let completar = function(destino) {
                 <h3>${elemento.tipo}</h3>
                 <h5>${elemento.nombre}</h5>
                 <p class="precioProducto">Precio: $${elemento.precio}</p>
-                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">SELECCIONAR</button> 
+                <button id="boton${elemento.id}" class="boton-agregar" onclick="agregarAlCarrito(${elemento.id})">AGREGAR</button> 
                 </span>
-            `;
+            `;          
             section.appendChild(article);
-
     });
 
     $("#paquetesPrincipales").show();
@@ -262,7 +261,7 @@ let finalizarCompra = document.getElementById("resumenCompra")
 let botonFinalizarCompra = document.createElement("div")
 botonFinalizarCompra.classList.add("btnFinalizar")
 botonFinalizarCompra.innerHTML += `
-    <button id="finCompra" type="button" class="btn btn-primary">FINALIZAR COMPRA</button>
+    <button id="finCompra" type="button" class="btn btn-primary">FINALIZAR COMPRA <i class="fas fa-check"></i></button>
 `
 finalizarCompra.appendChild(botonFinalizarCompra);
 
@@ -299,5 +298,6 @@ $("#finCompra").click (() => {
     let section = document.getElementById("divTemporal")
     section.remove();
     btnFinCompra.remove();
+    actualizarCarrito()
 })
 
